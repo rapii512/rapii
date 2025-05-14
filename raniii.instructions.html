@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Will You Accept Me Again?</title>
+<style>
+  /* General Styles */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffc1d3, #ffb6c1);
+    color: #800040;
+    overflow-x: hidden;
+    user-select: none;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="8" fill="pink"/></svg>') 16 16, auto;
+  }
+  h1, h2, h3 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-shadow: 1px 1px 2px #b35980;
+  }
+  .container {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 0 24px 40px 24px;
+    background: #fff0f6cc;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(255 105 180 / 0.3);
+  }
+  button {
+    background-color: #ff4d94;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    margin: 10px 8px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px #e60073;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+  button:hover {
+    background-color: #ff66a3;
+    box-shadow: 0 8px 15px #ff3385;
+    transform: translateY(-3px);
+  }
+  .hidden {
+    display: none !important;
+  }
+  /* Cursor animation styles */
+  #fake-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #ff4d94;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: top 0.05s, left 0.05s;
+    z-index: 1000;
+    mix-blend-mode: difference;
+    background: rgba(255, 77, 148, 0.3);
+  }
+  /* Second page styles */
+  .location-option, .date-option {
+    margin: 12px 0;
+  }
+  label {
+    font-size: 1.1rem;
+    min-width: 120px;
+    display: inline-block;
+  }
+  select {
+    padding: 8px 10px;
+    border-radius: 15px;
+    border: 2px solid #ff4d94;
+    font-size: 1rem;
+    color: #800040;
+    outline: none;
+  }
+  .date-section {
+    margin-top: 20px;
+  }
+  /* Third page summary */
+  .summary-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  /* Footer romantic note */
+  footer {
+    text-align: center;
+    color: #800040cc;
+    font-style: italic;
+    margin-top: 30px;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<div id="fake-cursor" class="hidden"></div>
+
+<!-- Page 1 -->
+<div id="page1" class="container" aria-label="Acceptance decision page">
+  <h1>haii ran Will you accept me back?</h1>
+  <div style="text-align:center; margin-top: 40px;">
+    <button id="btn-yia">yess</button>
+    <button id="btn-tidak">no </button>
+  </div>
+  <p style="text-align:center; margin-top: 50px; font-size: 1.2rem; font-weight: 600;">
+    (You must press <span style="color:#ff4d94;">must yes </span> to continue)</p>
+</div>
+
+<!-- Page 2 -->
+<div id="page2" class="container hidden" aria-label="Date selection page">
+  <h1>Select Your Date Plan</h1>
+  <div>
+    <h3>Choose a Location:</h3>
+    <div class="location-option">
+      <input type="radio" id="loc-blokm" name="location" value="Blok M" />
+      <label for="loc-blokm">Blok M</label>
+    </div>
+    <div class="location-option">
+      <input type="radio" id="loc-kotatua" name="location" value="Kota Tua" />
+      <label for="loc-kotatua">Kota Tua</label>
+    </div>
+    <div class="location-option">
+      <input type="radio" id="loc-mall" name="location" value="Mall Tangcity" />
+      <label for="loc-mall">Mall Tangcity</label>
+    </div>
+  </div>
+  <div class="date-section">
+    <h3>Select Date & Time:</h3>
+    <label for="date-day">Day:</label>
+    <select id="date-day" aria-label="Select Day">
+      <option value="" disabled selected>Choose a day</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+      <option value="Sunday">Sunday</option>
+    </select>
+    <br/><br/>
+    <label for="date-time">Time:</label>
+    <select id="date-time" aria-label="Select Time">
+      <option value="" disabled selected>Choose a time</option>
+      <option>10:00 AM</option>
+      <option>11:00 AM</option>
+      <option>12:00 PM</option>
+      <option>1:00 PM</option>
+      <option>2:00 PM</option>
+      <option>3:00 PM</option>
+      <option>4:00 PM</option>
+      <option>5:00 PM</option>
+      <option>6:00 PM</option>
+      <option>7:00 PM</option>
+    </select>
+  </div>
+  <div style="text-align:center; margin-top: 28px;">
+    <button id="btn-next3" disabled>Confirm Date &amp; Time</button>
+  </div>
+</div>
+
+<!-- Page 3 -->
+<div id="page3" class="container hidden" aria-label="Confirmation page">
+  <h1>Thank you!</h1>
+  <p class="summary-text" id="summary-text"></p>
+  <div style="text-align:center; margin-top: 30px;">
+    <button id="btn-restart">Back to Start</button>
+  </div>
+</div>
+
+<footer>❤️ May this sincere website convey my love and hope for us again. ❤️</footer>
+
+<script>
+  (() => {
+    const btnIyah = document.getElementById('btn-yia');
+    const btnTidak = document.getElementById('btn-tidak');
+    const fakeCursor = document.getElementById('fake-cursor');
+
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const page3 = document.getElementById('page3');
+
+    // Page 2 related elements
+    const btnNext3 = document.getElementById('btn-next3');
+    const summaryText = document.getElementById('summary-text');
+    const btnRestart = document.getElementById('btn-restart');
+
+    let cursorActive = false;
+    let cursorInterval;
+
+    // Random movement area - full viewport
+    const getRandomPosition = () => {
+      const padding = 40; // keep some padding from edges
+      const x = Math.floor(Math.random() * (window.innerWidth - padding * 2)) + padding;
+      const y = Math.floor(Math.random() * (window.innerHeight - padding * 2)) + padding;
+      return {x, y};
+    };
+
+    // Function to move fake cursor randomly every 250ms
+    const startCursorMovement = () => {
+      if (cursorActive) return;
+      cursorActive = true;
+      fakeCursor.classList.remove('hidden');
+      cursorInterval = setInterval(() => {
+        const {x, y} = getRandomPosition();
+        fakeCursor.style.left = x + 'px';
+        fakeCursor.style.top = y + 'px';
+      }, 250);
+      // Hide real cursor by setting body cursor none
+      document.body.style.cursor = 'none';
+    };
+
+    // Stop fake cursor animation and return normal cursor
+    const stopCursorMovement = () => {
+      cursorActive = false;
+      clearInterval(cursorInterval);
+      fakeCursor.classList.add('hidden');
+      document.body.style.cursor = 'url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="8" fill="pink"/></svg>) 16 16, auto';
+    };
+
+    // Clicking "tidak mau" triggers cursor animation
+    btnTidak.addEventListener('click', () => {
+      startCursorMovement();
+    });
+
+    // Clicking "iyah mau" stops animation and proceeds to page 2
+    btnIyah.addEventListener('click', () => {
+      stopCursorMovement();
+      page1.classList.add('hidden');
+      page2.classList.remove('hidden');
+      // Reset input selections for page2
+      Array.from(document.querySelectorAll('input[name="location"]')).forEach(i => i.checked = false);
+      document.getElementById('date-day').selectedIndex = 0;
+      document.getElementById('date-time').selectedIndex = 0;
+      btnNext3.disabled = true;
+    });
+
+    // Enable confirm button only if location, day, and time are all selected
+    function checkSelections() {
+      const locationSelected = !!document.querySelector('input[name="location"]:checked');
+      const daySelected = document.getElementById('date-day').value !== "";
+      const timeSelected = document.getElementById('date-time').value !== "";
+      btnNext3.disabled = !(locationSelected && daySelected && timeSelected);
+    }
+
+    // Add event listeners to inputs to check selections dynamically
+    Array.from(document.querySelectorAll('input[name="location"]')).forEach(radio => {
+      radio.addEventListener('change', checkSelections);
+    });
+    document.getElementById('date-day').addEventListener('change', checkSelections);
+    document.getElementById('date-time').addEventListener('change', checkSelections);
+
+    // When confirmed, show page 3 with summary
+    btnNext3.addEventListener('click', () => {
+      const location = document.querySelector('input[name="location"]:checked').value;
+      const day = document.getElementById('date-day').value;
+      const time = document.getElementById('date-time').value;
+      page2.classList.add('hidden');
+      summaryText.textContent = `You chose to date at ${location} on ${day} at ${time}. I can't wait to see you! 💖`;
+      page3.classList.remove('hidden');
+    });
+
+    // Restart button to go back to page 1
+    btnRestart.addEventListener('click', () => {
+      page3.classList.add('hidden');
+      page1.classList.remove('hidden');
+    });
+
+    // Accessibility: focus states for buttons
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(btn => {
+      btn.addEventListener('focus', e => {
+        e.target.style.outline = '3px solid #ff4d94';
+        e.target.style.outlineOffset = '3px';
+      });
+      btn.addEventListener('blur', e => {
+        e.target.style.outline = 'none';
+      });
+    });
+  })();
+</script>
+</body>
+</html>
+
